@@ -23,33 +23,8 @@ public class Parser {
             String line = null;
             for (int i=0;i<6671;i++) {
                 line = reader.readLine();
-                                
-                String[] split = line.split("\\|");
                 
-                Data newData = new Data();
-                
-                // ID
-                newData.id = Integer.parseInt(split[0]);
-                
-                // Tweet ID
-                split[1] = split[1].replace("*", "");
-                newData.tweetId = Long.parseLong(split[1]);
-                
-                // Time
-                newData.time = split[2];
-                
-                // User ID
-                split[3] = split[3].replace("*", "");
-                newData.userId = Integer.parseInt(split[3]);
-                
-                // Followers
-                newData.followers = Integer.parseInt(split[4]);
-                
-                // Location
-                newData.accountLocation = split[5];
-                
-                // Source
-                newData.tweetSource = split[6];
+                Data newData = new Data(line);
                 
                 data[i] = newData;
             }
