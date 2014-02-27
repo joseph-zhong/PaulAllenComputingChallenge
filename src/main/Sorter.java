@@ -13,9 +13,6 @@ public class Sorter {
 }
 
 class TimeComparator implements Comparator<Data> {
-    
-    TimeComparator() {
-    }
 
     @Override
     public int compare(Data o1, Data o2) {
