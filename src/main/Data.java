@@ -1,13 +1,18 @@
 package main;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
 public class Data {
     
     public int id;
     public long tweetId;
-    public String time;
+    public Date time;
     public int userId;
     public int followers;
     public String accountLocation;
@@ -22,7 +27,7 @@ public class Data {
     public long originalTweetId;
     public int retweets; // Not sure on this one...
     
-    public Data(String line, int lineNum) {
+    public Data(String line, int lineNum) throws ParseException {
         String[] split = line.split("`");
         
         // ID
@@ -33,7 +38,8 @@ public class Data {
         tweetId = Long.parseLong(split[1]);
                 
         // Time
-        time = split[2];
+        DateFormat df = new SimpleDateFormat("mm/dd/yyyy kk:mm", Locale.ENGLISH);
+        time = df.parse(split[2]);
                 
         // User ID
         split[3] = split[3].replace("*", "");
@@ -77,4 +83,6 @@ public class Data {
         split[15] = split[15].replace("*", "");
         retweets = Integer.parseInt(split[15]);
     }
+    
+    
 }
