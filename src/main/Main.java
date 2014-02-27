@@ -8,6 +8,7 @@ public class Main {
     
     public static void main(String[] args) throws FileNotFoundException, ParseException, IOException {
         Data[] data = Parser.parse("phailin_tweets.csv");
+        data = Filter.filter(data);
         Sorter.sortByTime(data);
         for (int i=0;i<50;i++)
             System.out.println(data[i].toString());

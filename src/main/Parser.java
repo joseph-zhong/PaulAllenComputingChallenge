@@ -24,6 +24,6 @@ public class Parser {
 
             data[i] = newData;
         }
-        return Filter.filter(data);
+        return data;
     }
 }
