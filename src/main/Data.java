@@ -4,22 +4,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Data {
-    private int id;
-    private long tweetId;
-    private String time;
-    private int userId;
-    private int followers;
-    private String accountLocation;
-    private String tweetSource;
-    private ArrayList<String> hashtags;
-    private double latitude;
-    private double longitude;
-    private String location;
-    private String url1;
-    private String expandedUrl1;
-    private boolean isRetweet;
-    private long originalTweetId;
-    private int retweets; // Not sure on this one...
+    
+    public int id;
+    public long tweetId;
+    public String time;
+    public int userId;
+    public int followers;
+    public String accountLocation;
+    public String tweetSource;
+    public ArrayList<String> hashtags;
+    public double latitude;
+    public double longitude;
+    public String location;
+    public String url1;
+    public String expandedUrl1;
+    public boolean isRetweet;
+    public long originalTweetId;
+    public int retweets; // Not sure on this one...
     
     public Data(String line, int lineNum) {
         String[] split = line.split("`");
