@@ -21,8 +21,8 @@ public class Data {
     private long originalTweetId;
     private int retweets; // Not sure on this one...
     
-    public Data(String line) {
-        String[] split = line.split("\\|");
+    public Data(String line, int lineNum) {
+        String[] split = line.split("`");
         
         // ID
         id = Integer.parseInt(split[0]);

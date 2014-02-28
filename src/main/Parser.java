@@ -24,7 +24,7 @@ public class Parser {
             for (int i=0;i<6671;i++) {
                 line = reader.readLine();
                 
-                Data newData = new Data(line);
+                Data newData = new Data(line,i);
                 
                 data[i] = newData;
             }
