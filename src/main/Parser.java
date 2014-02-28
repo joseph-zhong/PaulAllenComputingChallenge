@@ -7,16 +7,12 @@ import java.io.IOException;
 
 /** A class built around a buffered reader which can sort and stuff. */
 public class Parser {
-    
-    private BufferedReader reader;
-    private Data[] data = new Data[6671];
-    
-    public Parser(String ref) {
-        try {
-            reader = new BufferedReader(new FileReader(ref));
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + e);
-        }
+        
+    public static Data[] parse(String ref) throws FileNotFoundException {
+        BufferedReader reader;
+        Data[] data = new Data[6671];
+
+        reader = new BufferedReader(new FileReader(ref));
         
         try {
             reader.readLine(); // Header.
@@ -31,5 +27,6 @@ public class Parser {
         } catch (IOException e) {
             System.out.println("IO Error: " + e);
         }
+        return data;
     }
 }
