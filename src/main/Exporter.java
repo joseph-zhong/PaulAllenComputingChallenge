@@ -16,7 +16,7 @@ public class Exporter {
         
         long duration = data[data.length-1].time.getTime()-data[0].time.getTime();
         
-        int[] results = new int[(int)(duration/milliStep)+10];
+        int[] results = new int[(int)(duration/milliStep)+2];
         
         for (int i=0;i<data.length;i++) {
             if (data[i].time.after(current)) {
