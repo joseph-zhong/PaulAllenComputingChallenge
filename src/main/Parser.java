@@ -4,11 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 
 /** A class built around a buffered reader which can sort and stuff. */
 public class Parser {
         
-    public static Data[] parse(String ref) throws FileNotFoundException {
+    public static Data[] parse(String ref) throws FileNotFoundException, ParseException {
         BufferedReader reader;
         Data[] data = new Data[6671];
 
