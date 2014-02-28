@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 
 public class Data {
+    public int id;
     public long tweetId;
     public String time;
     public int userId;

@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Parser {
     
     private BufferedReader reader;
-    private Data[] data = new Data[6726];
+    private Data[] data = new Data[6671];
     
     public Parser(String ref) {
         try {
@@ -24,19 +24,32 @@ public class Parser {
             for (int i=0;i<6671;i++) {
                 line = reader.readLine();
                                 
-                String[] split = line.split("|");
+                String[] split = line.split("\\|");
                 
                 Data newData = new Data();
                 
-                System.out.println(split[0]);
-                newData.tweetId = Long.parseLong(split[0]);
-                newData.time = split[1];
-                newData.userId = Integer.parseInt(split[2]);
-                newData.followers = Integer.parseInt(split[3]);
-                newData.accountLocation = split[4];
-                newData.tweetSource = split[5];
+                // ID
+                newData.id = Integer.parseInt(split[0]);
                 
+                // Tweet ID
+                split[1] = split[1].replace("*", "");
+                newData.tweetId = Long.parseLong(split[1]);
                 
+                // Time
+                newData.time = split[2];
+                
+                // User ID
+                split[3] = split[3].replace("*", "");
+                newData.userId = Integer.parseInt(split[3]);
+                
+                // Followers
+                newData.followers = Integer.parseInt(split[4]);
+                
+                // Location
+                newData.accountLocation = split[5];
+                
+                // Source
+                newData.tweetSource = split[6];
                 
                 data[i] = newData;
             }
