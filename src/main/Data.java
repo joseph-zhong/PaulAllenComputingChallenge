@@ -54,35 +54,38 @@ public class Data {
         // Source
         tweetSource = split[6];
         
-        //Hashtags
+        // Hashtags
         hashtags = new ArrayList(Arrays.asList(split[7].split(" ")));
         
-        //GPS-Lat
+        // GPS-Lat
         latitude = !split[8].isEmpty() ? Double.parseDouble(split[8]) : latitude;
         
-        //GPS-Long
+        // GPS-Long
         longitude = !split[9].isEmpty() ? Double.parseDouble(split[9]) : longitude;
         
-        //Location
+        // Location
         location = !split[10].isEmpty() ? split[10] : location;
         
-        //URL
+        // URL
         url1 = !split[11].isEmpty() ? split[11] : url1;
         
-        //URL-Expanded
+        // URL-Expanded
         expandedUrl1 = !split[12].isEmpty() ? split[12] : expandedUrl1;
         
-        //Is Retweet
+        // Is Retweet
         isRetweet = Integer.parseInt(split[13]) == 1;
         
-        //Original Tweet ID
+        // Original Tweet ID
         split[14] = split[14].replace("*", "");
         originalTweetId = Long.parseLong(split[14]);
         
-        //Retweets
+        // Retweets
         split[15] = split[15].replace("*", "");
         retweets = Integer.parseInt(split[15]);
     }
     
-    
+    @Override
+    public String toString() {
+        return time.toString() + " " + tweetId;
+    }
 }
