@@ -2,23 +2,19 @@ package main;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Date;
 
 /** Contains static methods to sort Data[] */
 public class Sorter {
     
-    public static Date[] sortByTime(Date[] dates) {
-        Arrays.sort(dates);
-        return dates;
+    public static Data[] sortByTime(Data[] data) {
+        Arrays.sort(data,new TimeComparator());
+        return data;
     }
 }
 
 class TimeComparator implements Comparator<Data> {
-
-    private final String matching;
-
-    TimeComparator(String s) {
-        this.matching = s;
+    
+    TimeComparator() {
     }
 
     @Override
