@@ -12,14 +12,14 @@ public class Exporter {
                 
         int milliStep = hoursStep*3600000;
         
-        int pos = 0;
+        int pos = -1;
         
         long duration = data[data.length-1].time.getTime()-data[0].time.getTime();
         
-        int[] results = new int[(int)(duration/milliStep)+2];
+        int[] results = new int[(int)(duration/milliStep)+1];
         
         for (int i=0;i<data.length;i++) {
-            if (data[i].time.after(current)) {
+            if (!data[i].time.before(current)) {
                 current.setTime(current.getTime()+milliStep);
                 pos++;
             }
