@@ -4,6 +4,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.gson.Gson;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /** Contains static methods to export Data[] */
 public class Exporter {
     
@@ -73,6 +78,19 @@ public class Exporter {
     }
     
     public static void exportAsJson(Data[] data) {
-        // todo
+        Gson gsonInit = new Gson();
+        String jsonString = "[" + gsonInit.toJson(data[0]);
+        for(int i = 1; i < data.length; i++) {
+            jsonString += ", " + gsonInit.toJson(data[i]);
+        }
+        jsonString += "]";
+        
+        File jsonFile = new File("resources", "JsonWriter.json");
+        try { 
+            FileWriter jsonWriter = new FileWriter(jsonFile);
+            jsonWriter.append(jsonString);
+        } catch (IOException e) { System.err.println("Error: " + e); }
+        
+        System.out.println(jsonString);
     }
 }
