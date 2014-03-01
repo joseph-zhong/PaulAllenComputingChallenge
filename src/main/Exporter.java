@@ -7,7 +7,7 @@ import java.util.Date;
 /** Contains static methods to export Data[] */
 public class Exporter {
     
-    public static String exportTweetsOverTimeToString(Data[] data, int hoursStep) {
+    public static String exportTweetsOverTimeString(Data[] data, int hoursStep) {
         int[] tweets = exportTweetsOverTime(data,hoursStep);
         
         StringBuilder result = new StringBuilder();
@@ -23,7 +23,28 @@ public class Exporter {
             current.setTime(current.getTime()+milliStep);
             result.append(df.format(current)).append(": ").append(tweets[i]).append(" tweets.").append("\n");
         }
+        return result.toString();
+    }
+    
+    public static String exportTweetsOverTimeAscii(Data[] data, int hoursStep, int scale) {
+        int[] tweets = exportTweetsOverTime(data,hoursStep);
         
+        StringBuilder result = new StringBuilder();
+        
+        Date current = (Date) data[0].time.clone();
+        
+        int milliStep = hoursStep*3600000;
+        
+        DateFormat df = new SimpleDateFormat("dd HH:mm");
+        
+        for (int i=0;i<tweets.length;i++) {
+            result.append(df.format(current)).append(" - ");
+            current.setTime(current.getTime()+milliStep);
+            result.append(df.format(current)).append(": ");
+            for (int j=0;j<tweets[i]/scale;j++)
+                result.append("-");
+            result.append("\n");
+        }
         return result.toString();
     }
     

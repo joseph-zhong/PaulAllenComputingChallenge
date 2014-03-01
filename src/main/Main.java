@@ -9,6 +9,6 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, ParseException, IOException {
         Data[] data = Parser.parse("phailin_tweets.csv");
         
-        System.out.println(Exporter.exportTweetsOverTimeToString(data,1));
+        System.out.println(Exporter.exportTweetsOverTimeAscii(data,1,4));
     }
 }
