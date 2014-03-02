@@ -1,12 +1,13 @@
 package main;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /** Contains static methods to export Data[] */
 public class Exporter {
@@ -30,6 +31,29 @@ public class Exporter {
         return result.toString();
     }
     
+    public static void exportTweetsOverTimeCsv(Data[] data, int hoursStep, int scale) throws IOException {
+        int[] tweets = exportTweetsOverTime(data,hoursStep);
+        
+        StringBuilder result = new StringBuilder();
+        
+        Date current = (Date) data[0].time.clone();
+        
+        int milliStep = hoursStep*3600000;
+        
+        DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
+        
+        result.append("Time,Tweets\n");
+        
+        for (int i=0;i<tweets.length;i++) {
+            result.append(df.format(current)).append(",");
+            current.setTime(current.getTime()+milliStep);
+            result.append(tweets[i]).append("\n");
+        }
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("tweets_over_time.csv")));
+        out.print(result.toString());
+        out.close();
+    }
+    
     public static String exportTweetsOverTimeAscii(Data[] data, int hoursStep, int scale) {
         int[] tweets = exportTweetsOverTime(data,hoursStep);
         
@@ -39,7 +63,7 @@ public class Exporter {
         
         int milliStep = hoursStep*3600000;
         
-        DateFormat df = new SimpleDateFormat("dd HH:mm");
+        DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
         
         for (int i=0;i<tweets.length;i++) {
             result.append(df.format(current)).append(" - ");
