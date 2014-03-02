@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -78,14 +77,28 @@ public class Exporter {
     }
     
     public static void exportAsJson(Data[] data) {
-        Gson gsonInit = new Gson();
-        String jsonString = "[" + gsonInit.toJson(data[0]);
-        for(int i = 1; i < data.length; i++) {
-            jsonString += ", " + gsonInit.toJson(data[i]);
-        }
-        jsonString += "]";
+        Data[] geoData = Sorter.sortByTime(Filter.filterGeoLoc(data));
+        int[] timeData = exportTweetsOverTime(geoData, 1);
+        Date current = (Date)geoData[0].time.clone();
+        current.setTime(current.getTime() + 3600000);
         
-        File jsonFile = new File("resources", "JsonWriter.json");
+        String jsonString = "[[\"Set\", [";
+        int timePos = 0;
+        for(int i = 0; i < geoData.length; i++) {
+            jsonString += geoData[i].latitude + ", ";
+            jsonString += geoData[i].longitude + ", ";
+            if(geoData[i].time.before(current))
+                jsonString += timeData[timePos];
+            else {
+                timePos++;
+                current.setTime(current.getTime() + 3600000);
+            }
+            if(i != geoData.length - 1)
+                jsonString += ", ";
+        }
+        jsonString += "]]]";
+        
+        File jsonFile = new File("resources", "JsonData.json");
         try { 
             FileWriter jsonWriter = new FileWriter(jsonFile);
             jsonWriter.append(jsonString);

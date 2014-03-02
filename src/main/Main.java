@@ -8,9 +8,9 @@ public class Main {
     
     public static void main(String[] args) throws FileNotFoundException, ParseException, IOException {
         Data[] data = Parser.parse("phailin_tweets.csv");
-        Data[] geoLoc = Filter.filterGeoLoc(data);
-        Exporter.exportAsJson(geoLoc);
+        Exporter.exportAsJson(data);
         
+        System.out.println();
         System.out.println(Exporter.exportTweetsOverTimeAscii(data,1,4));
     }
 }
