@@ -12,6 +12,6 @@ public class Main {
         
         System.out.println();
         System.out.println(Exporter.exportTweetsOverTimeAscii(data,1,4));
-        Exporter.exportTweetsOverTimeCsv(data,1,4);
+        Exporter.exportTweetsOverTimeCsv(data,1);
     }
 }
