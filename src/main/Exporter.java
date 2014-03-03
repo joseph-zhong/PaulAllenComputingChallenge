@@ -83,8 +83,7 @@ public class Exporter {
     
     public static void exportAsJson(Data[] data) {
         Data[] geoData = Sorter.sortByTime(Filter.filterGeoLoc(data));
-        int[] timeData = exportTweetsOverTime(geoData, 1);
-        Date current = (Date)geoData[0].time.clone();
+        Date current = (Date) geoData[0].time.clone();
         current.setTime(current.getTime() + 3600000);
         
         String jsonString = "[[\"Series\",[";
@@ -93,11 +92,11 @@ public class Exporter {
             jsonString += geoData[i].latitude + ", ";
             jsonString += geoData[i].longitude + ", ";
             if(geoData[i].time.before(current))
-                jsonString += timeData[timePos];
+                jsonString += timePos;
             else {
                 timePos++;
                 current.setTime(current.getTime() + 3600000);
-                jsonString += timeData[timePos];
+                jsonString += timePos;
             }
             if(i < geoData.length - 1)
                 jsonString += ", ";
