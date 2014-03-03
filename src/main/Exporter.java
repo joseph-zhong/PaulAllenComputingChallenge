@@ -87,7 +87,7 @@ public class Exporter {
         Date current = (Date)geoData[0].time.clone();
         current.setTime(current.getTime() + 3600000);
         
-        String jsonString = "[";
+        String jsonString = "[[\"Series\",[";
         int timePos = 0;
         for(int i = 0; i < geoData.length; i++) {
             jsonString += geoData[i].latitude + ", ";
@@ -102,7 +102,7 @@ public class Exporter {
             if(i < geoData.length - 1)
                 jsonString += ", ";
         }
-        jsonString += "]";
+        jsonString += "]]]";
         
         File jsonFile = new File("resources", "JsonData.json");
         try { 
