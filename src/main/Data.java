@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
+import main.util.Vector2D;
 
 public class Data {
     
@@ -82,6 +83,12 @@ public class Data {
         // Retweets
         split[15] = split[15].replace("*", "");
         retweets = Integer.parseInt(split[15]);
+    }
+    
+    public boolean isWithinDistance(double distance, Vector2D referenceVector) {
+        Vector2D locationVector = new Vector2D(latitude, longitude);
+        double radius = 3956.6;
+        return Vector2D.angle(locationVector, referenceVector) * radius <= distance;
     }
     
     @Override
