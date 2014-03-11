@@ -56,7 +56,12 @@ public class Data {
         tweetSource = split[6];
         
         // Hashtags
-        hashtags = new ArrayList(Arrays.asList(split[7].split(" ")));
+        hashtags = new ArrayList(Arrays.asList(split[7].split("#")));
+        for(int i = 0; i < hashtags.size(); i++)
+            if(hashtags.get(i).contains(",") || hashtags.get(i).contains(" ") || hashtags.get(i).contains("\'") || hashtags.get(i).contains("\""))
+                //Probably the least efficient IF statement in existence
+                hashtags.set(i, hashtags.get(i).replace(",", "").replace(" ", "").replace("\'", "").replace("\"", ""));
+        hashtags.remove(0);
         
         // GPS-Lat
         latitude = !split[8].isEmpty() ? Double.parseDouble(split[8]) : latitude;

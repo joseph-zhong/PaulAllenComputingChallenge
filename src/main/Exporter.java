@@ -81,29 +81,27 @@ public class Exporter {
         return results;
     }
     
-    public static void exportAsJson(Data[] data) {
-        Data[] geoData = Sorter.sortByTime(Filter.filterGeoLoc(data));
-        Date current = (Date) geoData[0].time.clone();
-        current.setTime(current.getTime() + 3600000);
-        
-        String jsonString = "[[\"Series\",[";
+    public static void exportAsJson(Data[][] data) {
+        String jsonString = "[[";
         int timePos = 0;
-        for(int i = 0; i < geoData.length; i++) {
-            jsonString += geoData[i].latitude + ", ";
-            jsonString += geoData[i].longitude + ", ";
-            if(geoData[i].time.before(current))
-                jsonString += timePos;
-            else {
-                timePos++;
-                current.setTime(current.getTime() + 3600000);
-                jsonString += timePos;
+        int i = 0;
+        int j = 0;
+        while(i < 3) {
+            jsonString += "\'Series" + i + "\'[";
+            while(data[i][j] != null) {
+                jsonString += data[i][j].latitude + ", ";
+                jsonString += data[i][j].longitude + ", ";
+                jsonString += 10;
+                if(data[i][j+1] != null)
+                    jsonString += ", ";
+                j++;
             }
-            if(i < geoData.length - 1)
-                jsonString += ", ";
+            jsonString += "]";
+            i++;
         }
-        jsonString += "]]]";
+        jsonString += "]]";
         
-        File jsonFile = new File("resources", "JsonData.json");
+        File jsonFile = new File("resources", "data.json");
         try { 
             FileWriter jsonWriter = new FileWriter(jsonFile);
             jsonWriter.append(jsonString);
