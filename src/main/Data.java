@@ -57,10 +57,13 @@ public class Data {
         
         // Hashtags
         hashtags = new ArrayList(Arrays.asList(split[7].split("#")));
-        for(int i = 0; i < hashtags.size(); i++)
+        for(int i = 0; i < hashtags.size(); i++) {
             if(hashtags.get(i).contains(",") || hashtags.get(i).contains(" ") || hashtags.get(i).contains("\'") || hashtags.get(i).contains("\""))
                 //Probably the least efficient IF statement in existence
-                hashtags.set(i, hashtags.get(i).replace(",", "").replace(" ", "").replace("\'", "").replace("\"", ""));
+                hashtags.set(i, hashtags.get(i).replace(",", "").replace(" ", "").replace("\'", "").replace("\"", "").toLowerCase());
+            else
+                hashtags.set(i, hashtags.get(i).toLowerCase());
+        }       
         hashtags.remove(0);
         
         // GPS-Lat

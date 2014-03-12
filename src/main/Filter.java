@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Filter {
     public static Data[] filterGeo(Data[] set) {
@@ -26,15 +27,18 @@ public class Filter {
         Data[] geoData = Sorter.sortByTime(Filter.filterRetweet(Filter.filterGeoLoc(set)));
         HashMap<String, Integer> hashTags = new HashMap<>();
         ArrayList<String> numHash = new ArrayList<>();
-        Data[][] filteredSet = new Data[3][geoData.length];
+        ArrayList<ArrayList<Data>> filteredSet = new ArrayList<>();
+        for(int i = 0; i < 3; i++) { filteredSet.add(new ArrayList<Data>()); }
         for(Data item : geoData) {
             for(String hashtag : item.hashtags) {
-                if(!hashTags.keySet().contains(hashtag))
-                    hashTags.put(hashtag, 1);
-                else {
-                    int count = hashTags.get(hashtag);
-                    hashTags.remove(hashtag);
-                    hashTags.put(hashtag, count++);
+                if(!hashtag.isEmpty()) {
+                    if(!hashTags.keySet().contains(hashtag))
+                        hashTags.put(hashtag, 1);
+                    else {
+                        int count = hashTags.get(hashtag);
+                        hashTags.remove(hashtag);
+                        hashTags.put(hashtag, count+1);
+                    }
                 }
             }
         }
@@ -46,7 +50,7 @@ public class Filter {
         for(String hashtag : hashTags.keySet()) {
             if(!hashtag.isEmpty()) {
                 for(int i = 0; i < numHash.size(); i++) {
-                    if(hashTags.get(hashtag) > hashTags.get(numHash.get(i))) {
+                    if(hashTags.get(hashtag) > hashTags.get(numHash.get(i)) && !numHash.contains(hashtag)) {
                         numHash.add(i, hashtag);
                         numHash.remove(3);
                     }
@@ -54,20 +58,18 @@ public class Filter {
             }
         }
         
-        int setIndex = 0;
         int index = 0;
         
-        for(String hashTag : numHash) {
+        for(String hashtag : numHash) {
             for(Data item : geoData) {
-                if(item.hashtags.contains(hashTag)) {
-                    filteredSet[setIndex][index] = item;
-                    index++;
+                if(item.hashtags.contains(hashtag)) {
+                    filteredSet.get(index).add(item);
                 }
             }
-            setIndex++;
+            index++;
         }
         
-        return filteredSet;
+        return new Data[][]{filteredSet.get(0).toArray(new Data[filteredSet.get(0).size()]), filteredSet.get(1).toArray(new Data[filteredSet.get(1).size()]), filteredSet.get(2).toArray(new Data[filteredSet.get(2).size()])};
     }
     
     public static Data[] filterRetweet(Data[] set) {
