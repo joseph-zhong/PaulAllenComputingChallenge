@@ -93,11 +93,12 @@ public class Exporter {
                 jsonString += data[i][j].longitude + ", ";
                 jsonString += 10;
                 if((j+1) < data[i].length)
-                    jsonString += ", ";
+                    jsonString += ", "; 
+                jsonString += System.getProperty("line.separator");
                 j++;
             }
             if(i != 2)
-                jsonString += "], ";
+                jsonString += "], " + System.getProperty("line.separator");
             i++;
             j = 0;
         }
