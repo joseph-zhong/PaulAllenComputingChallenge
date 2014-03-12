@@ -87,7 +87,7 @@ public class Exporter {
         int i = 0;
         int j = 0;
         while(i < 3) {
-            jsonString += "\'Series" + i + "\'[";
+            jsonString += "\'" + (1990 + 5*i) + "\'[";
             while(j < data[i].length) {
                 jsonString += data[i][j].latitude + ", ";
                 jsonString += data[i][j].longitude + ", ";
@@ -96,7 +96,8 @@ public class Exporter {
                     jsonString += ", ";
                 j++;
             }
-            jsonString += "]";
+            if(i != 2)
+                jsonString += "], ";
             i++;
             j = 0;
         }
