@@ -2,7 +2,6 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Filter {
     public static Data[] filterGeo(Data[] set) {
