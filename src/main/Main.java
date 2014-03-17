@@ -3,6 +3,7 @@ package main;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import main.render.Renderer;
 
 public class Main {
     
@@ -13,5 +14,7 @@ public class Main {
         System.out.println();
         System.out.println(Exporter.exportTweetsOverTimeAscii(data,1,4));
         Exporter.exportTweetsOverTimeCsv(data,1);
+        
+        Renderer r = new Renderer();
     }
 }
