@@ -28,7 +28,7 @@ public class Exporter {
         for (int i=0;i<tweets.length;i++) {
             result.append(df.format(current)).append(",");
             current.setTime(current.getTime()+milliStep);
-            result.append(tweets[i]).append("\n");
+            result.append(tweets[i]).append(System.getProperty("line.separator"));
         }
         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("tweets_over_time.csv")));
         out.print(result.toString());
@@ -79,6 +79,15 @@ public class Exporter {
         }
         
         return results;
+    }
+    
+    public static Packet[] exportToPackets(Data[] data) {
+        Packet[] returnPacket = new Packet[data.length];
+        
+        for(int i = 0; i < data.length; i++)
+            returnPacket[i] = Packet.getPacketFromData(data[i]);
+        
+        return returnPacket;
     }
     
     public static void exportAsJson(Data[][] data) {

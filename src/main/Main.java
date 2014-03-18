@@ -8,8 +8,7 @@ public class Main {
     
     public static void main(String[] args) throws FileNotFoundException, ParseException, IOException {
         Data[] data = Parser.parse("phailin_tweets.csv");
-        Data[][] filteredData = Filter.filterHashtag(data);
-        Exporter.exportAsJson(filteredData);
+        Packet[] packet = Exporter.exportToPackets(data);
         
         System.out.println();
         System.out.println(Exporter.exportTweetsOverTimeAscii(data,1,4));
