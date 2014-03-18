@@ -1,4 +1,4 @@
-package main.util;
+package main.math;
 
 public class Vector3D {
     private double x;

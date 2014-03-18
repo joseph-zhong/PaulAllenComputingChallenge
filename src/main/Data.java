@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
-import main.util.Vector2D;
+import main.math.Vector2D;
 
 public class Data {
     
