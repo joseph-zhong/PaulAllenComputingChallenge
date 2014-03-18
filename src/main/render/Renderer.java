@@ -19,6 +19,10 @@ public class Renderer {
         }
     }
     
+    public void renderGlobe() {
+        
+    }
+    
     public void addPoint(float lat, float lng, int size, float r, float g, float b) {
         float phi = (float)((90-lat)*Math.PI/180);
         float theta = (float)((180-lng)*Math.PI/180);
