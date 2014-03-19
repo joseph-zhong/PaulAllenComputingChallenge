@@ -39,7 +39,7 @@ public class Data {
         tweetId = Long.parseLong(split[1]);
                 
         // Time
-        DateFormat df = new SimpleDateFormat("mm/dd/yyyy kk:mm", Locale.ENGLISH);
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy kk:mm", Locale.ENGLISH);
         time = df.parse(split[2]);
                 
         // User ID
