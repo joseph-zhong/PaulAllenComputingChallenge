@@ -1,5 +1,7 @@
-package main;
+package main.util;
 
+import main.util.data.Packet;
+import main.util.data.Data;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

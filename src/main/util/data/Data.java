@@ -1,4 +1,4 @@
-package main;
+package main.util.data;
 
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -1,5 +1,6 @@
-package main;
+package main.util;
 
+import main.util.data.Data;
 import java.util.Arrays;
 import java.util.Comparator;
 

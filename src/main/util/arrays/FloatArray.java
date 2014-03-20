@@ -1,4 +1,4 @@
-package main.util;
+package main.util.arrays;
 
 public class FloatArray {
     private float[] x;
@@ -6,6 +6,10 @@ public class FloatArray {
     
     public FloatArray(int size) {
         x = new float[size];
+    }
+    
+    public FloatArray(float[] x) {
+        this.x = x;
     }
     
     public void add(int value) {

@@ -1,4 +1,4 @@
-package main.util;
+package main.util.arrays;
 
 public class StringArray {
     private String[] x;
@@ -6,6 +6,10 @@ public class StringArray {
     
     public StringArray(int size) {
         x = new String[size];
+    }
+    
+    public StringArray(String[] x) {
+        this.x = x;
     }
     
     public void add(String value) {

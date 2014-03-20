@@ -1,5 +1,6 @@
-package main;
+package main.util;
 
+import main.util.data.Data;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

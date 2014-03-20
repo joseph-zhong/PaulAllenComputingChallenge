@@ -1,7 +1,8 @@
-package main;
+package main.util;
 
+import main.util.data.Data;
 import java.util.ArrayList;
-import main.util.DataArray;
+import main.util.arrays.DataArray;
 
 public class Filter {
     public static Data[] filterGeo(Data[] set) {
@@ -23,12 +24,11 @@ public class Filter {
     }
     
     public static Data[] filterHashtag(Data[] set, String hashtag) {
-        Data[] geoData = Sorter.sortByTime(Filter.filterRetweet(Filter.filterGeoLoc(set)));
+        Data[] geoData = Sorter.sortByTime(Filter.filterRetweet(set));
         DataArray array = new DataArray(set.length);
-        for(Data item : geoData) {
+        for(Data item : geoData)
             if(item.hashtags.contains(hashtag))
                 array.add(item);
-        }
         
         return array.getValues();
     }

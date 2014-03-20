@@ -1,6 +1,6 @@
-package main.util;
+package main.util.arrays;
 
-import main.Data;
+import main.util.data.Data;
 
 public class DataArray {
     private Data[] x;
@@ -8,6 +8,10 @@ public class DataArray {
     
     public DataArray(int size) {
         x = new Data[size];
+    }
+    
+    public DataArray(Data[] x) {
+        this.x = x;
     }
     
     public void add(Data value) {
@@ -28,14 +32,14 @@ public class DataArray {
     
     @Override
     public String toString() {
-        String returnData = "";
+        String returnString = "";
         
         for(int i = 0; i < pos; i++) {
-            returnData += x[i];
+            returnString += x[i];
             if(i < pos - 1)
-                returnData += ", ";
+                returnString += ", ";
         }
         
-        return returnData;
+        return returnString;
     }
 }

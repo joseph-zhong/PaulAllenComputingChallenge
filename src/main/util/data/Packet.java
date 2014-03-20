@@ -1,4 +1,4 @@
-package main;
+package main.util.data;
 
 public class Packet {
     public double latitude;
@@ -17,5 +17,13 @@ public class Packet {
     
     public static Packet getPacketFromData(Data data, double magnitude) {
         return new Packet(data.latitude, data.longitude, magnitude);
+    }
+    
+    public static Packet[] getPacketFromData(Data[] data) {
+        Packet[] returnPacket = new Packet[data.length];
+        for(int i = 0; i < data.length; i++)
+            returnPacket[i] = Packet.getPacketFromData(data[i]);
+        
+        return returnPacket;
     }
 }
