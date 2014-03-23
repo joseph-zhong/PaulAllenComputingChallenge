@@ -1,22 +1,20 @@
 package main.util.data;
 
 public class Packet {
-    public double latitude;
-    public double longitude;
+    public Point point;
     public double magnitude;
     
     public Packet(double latitude, double longitude, double magnitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.point = new Point(latitude, longitude);
         this.magnitude = magnitude;
     }
     
     public static Packet getPacketFromData(Data data) {
-        return new Packet(data.latitude, data.longitude, 10);
+        return new Packet(data.point.latitude, data.point.longitude, 10);
     }
     
     public static Packet getPacketFromData(Data data, double magnitude) {
-        return new Packet(data.latitude, data.longitude, magnitude);
+        return new Packet(data.point.latitude, data.point.longitude, magnitude);
     }
     
     public static Packet[] getPacketFromData(Data[] data) {

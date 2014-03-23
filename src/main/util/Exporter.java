@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import main.math.Vector2D;
+import main.util.data.Point;
 
 /** Contains static methods to export Data[] */
 public class Exporter {
@@ -25,7 +27,7 @@ public class Exporter {
         
         DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
         
-        result.append("Time,Tweets\n");
+        result.append("Time,Tweets").append(System.getProperty("line.separator"));
         
         for (int i=0;i<tweets.length;i++) {
             result.append(df.format(current)).append(",");
@@ -72,8 +74,8 @@ public class Exporter {
         
         int[] results = new int[(int)(duration/milliStep)+1];
         
-        for (int i=0;i<data.length;i++) {
-            if (!data[i].time.before(current)) {
+        for (Data item : data) {
+            if (!item.time.before(current)) {
                 current.setTime(current.getTime()+milliStep);
                 pos++;
             }
@@ -81,6 +83,14 @@ public class Exporter {
         }
         
         return results;
+    }
+    
+    public static int exportTweetsNearLocation(Data[] data, Point point) {
+        int count = 0;
+        for(Data item : data)
+            if(item.isWithinDistance(new Vector2D(point), (double)100))
+                count++;
+        return count;
     }
     
     public static Packet[] exportToPackets(Data[] data) {
@@ -100,8 +110,8 @@ public class Exporter {
         while(i < 3) {
             jsonString += "\'" + (1990 + 5*i) + "\'[";
             while(j < data[i].length) {
-                jsonString += data[i][j].latitude + ", ";
-                jsonString += data[i][j].longitude + ", ";
+                jsonString += data[i][j].point.latitude + ", ";
+                jsonString += data[i][j].point.longitude + ", ";
                 jsonString += 10;
                 if((j+1) < data[i].length)
                     jsonString += ", "; 

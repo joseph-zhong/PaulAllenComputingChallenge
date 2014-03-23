@@ -19,8 +19,7 @@ public class Data {
     public String accountLocation;
     public String tweetSource;
     public ArrayList<String> hashtags;
-    public double latitude;
-    public double longitude;
+    public Point point;
     public String location;
     public String url1;
     public String expandedUrl1;
@@ -66,11 +65,10 @@ public class Data {
         }       
         hashtags.remove(0);
         
-        // GPS-Lat
-        latitude = !split[8].isEmpty() ? Double.parseDouble(split[8]) : latitude;
-        
-        // GPS-Long
-        longitude = !split[9].isEmpty() ? Double.parseDouble(split[9]) : longitude;
+        //GPS-Lat and GPS-Long coordinates
+        try {
+            point = new Point(Double.parseDouble(split[8]), Double.parseDouble(split[9]));
+        } catch(NumberFormatException e) {}
         
         // Location
         location = !split[10].isEmpty() ? split[10] : location;
@@ -93,8 +91,8 @@ public class Data {
         retweets = Integer.parseInt(split[15]);
     }
     
-    public boolean isWithinDistance(double distance, Vector2D referenceVector) {
-        Vector2D locationVector = new Vector2D(latitude, longitude);
+    public boolean isWithinDistance(Vector2D referenceVector, double distance) {
+        Vector2D locationVector = new Vector2D(point);
         double radius = 3956.6;
         return Vector2D.angle(locationVector, referenceVector) * radius <= distance;
     }

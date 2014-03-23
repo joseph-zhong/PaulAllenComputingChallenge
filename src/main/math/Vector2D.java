@@ -1,5 +1,7 @@
 package main.math;
 
+import main.util.data.Point;
+
 public class Vector2D {
     private double x;
     private double y;
@@ -12,6 +14,7 @@ public class Vector2D {
     
     public Vector2D(double x) { this.x=x; magnitude(); }
     public Vector2D(double x, double y) { this.x=x; this.y=y; magnitude(); }
+    public Vector2D(Point point) { this.x=point.longitude; this.y=point.latitude; magnitude(); }
     
     public static double dotProduct(Vector2D v1, Vector2D v2) {
         return v1.getX()*v2.getX() + v1.getY()*v2.getY();

@@ -17,7 +17,7 @@ public class Filter {
     public static Data[] filterGeoLoc(Data[] set) {
         ArrayList<Data> filteredSet = new ArrayList<>();
         for(Data item : set)
-            if(item.latitude != 0 || item.longitude != 0)
+            if(item.point != null)
                 filteredSet.add(item);
         
         return filteredSet.toArray(new Data[filteredSet.size()]);
