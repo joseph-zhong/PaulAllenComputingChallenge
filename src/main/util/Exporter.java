@@ -27,12 +27,12 @@ public class Exporter {
         
         DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
         
-        result.append("Time,Tweets").append(System.getProperty("line.separator"));
+        result.append("Time,Tweets\n");
         
         for (int i=0;i<tweets.length;i++) {
             result.append(df.format(current)).append(",");
             current.setTime(current.getTime()+milliStep);
-            result.append(tweets[i]).append(System.getProperty("line.separator"));
+            result.append(tweets[i]).append("\n");
         }
         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("tweets_over_time.csv")));
         out.print(result.toString());
@@ -102,33 +102,25 @@ public class Exporter {
         return returnPacket;
     }
     
-    public static void exportAsJson(Data[][] data) {
-        String jsonString = "[[";
+    public static void exportAsJson(Data[] data) {
+        String tab = "    ";
+        String jsonString = "[\n" + tab + "[\n" + (tab+tab);
         int timePos = 0;
         int i = 0;
-        int j = 0;
-        while(i < 3) {
-            jsonString += "\'" + (1990 + 5*i) + "\'[";
-            while(j < data[i].length) {
-                jsonString += data[i][j].point.latitude + ", ";
-                jsonString += data[i][j].point.longitude + ", ";
-                jsonString += 10;
-                if((j+1) < data[i].length)
-                    jsonString += ", "; 
-                jsonString += System.getProperty("line.separator");
-                j++;
-            }
-            if(i != 2)
-                jsonString += "], " + System.getProperty("line.separator");
+        jsonString += "\'Series\', [";
+        while(i < data.length) {
+            jsonString += data[i].point.latitude + ", ";
+            jsonString += data[i].point.longitude + ", ";
+            jsonString += 10;
+            if((i+1) < data.length)
+                jsonString += ", "; 
             i++;
-            j = 0;
         }
-        jsonString += "]]";
-        
+        jsonString += "]\n" + tab + "]\n" + "]";   
         File jsonFile = new File("resources", "data.json");
         try { 
-            FileWriter jsonWriter = new FileWriter(jsonFile);
-            jsonWriter.append(jsonString);
+            PrintWriter jsonWriter = new PrintWriter(new BufferedWriter(new FileWriter(jsonFile)));
+            jsonWriter.print(jsonString);
         } catch (IOException e) { System.err.println("Error: " + e); }
         
         System.out.println(jsonString);
