@@ -88,7 +88,7 @@ public class Exporter {
     public static int exportTweetsNearLocation(Data[] data, Point point) {
         int count = 0;
         for(Data item : data)
-            if(item.isWithinDistance(new Vector2D(point), (double)100))
+            if(item.isWithinDistance(new Vector2D(point.longitude, point.latitude), (double)100))
                 count++;
         return count;
     }

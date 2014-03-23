@@ -10,9 +10,11 @@ import main.util.data.Point;
 public class Main {
     
     public static void main(String[] args) throws FileNotFoundException, ParseException, IOException {
+        //List of top 11 hashtags including #phailin, top ten excluding
         String[] hashtags = new String[] 
             {"phailin","cyclonephailin","odisha","india","cyclone","news",
             "andhrapradesh","phailinfury","bhubaneswar","gopalpur","nari"};
+        //Lat-Long for Gopalpur and Mumbai, respectively
         Point[] locations = new Point[] { new Point(19.27, 84.92), new Point(18.975, 72.8258) };
         Data[] data = Parser.parse("phailin_tweets.csv");
     }

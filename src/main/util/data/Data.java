@@ -92,7 +92,7 @@ public class Data {
     }
     
     public boolean isWithinDistance(Vector2D referenceVector, double distance) {
-        Vector2D locationVector = new Vector2D(point);
+        Vector2D locationVector = new Vector2D(point.longitude, point.latitude);
         double radius = 3956.6;
         return Vector2D.angle(locationVector, referenceVector) * radius <= distance;
     }
