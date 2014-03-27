@@ -1,7 +1,5 @@
 package main.util;
 
-import main.util.data.Packet;
-import main.util.data.Data;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,12 +9,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import main.math.Vector2D;
+import main.util.data.Data;
+import main.util.data.Packet;
 import main.util.data.Point;
 
 /** Contains static methods to export Data[] */
 public class Exporter {
     
-    public static void exportTweetsOverTimeCsv(Data[] data, int hoursStep) throws IOException {
+    public static void exportTweetsOverTimeCsv(Data[] data, int hoursStep, String file, boolean time) throws IOException {
         int[] tweets = exportTweetsOverTime(data,hoursStep);
         
         StringBuilder result = new StringBuilder();
@@ -27,16 +27,23 @@ public class Exporter {
         
         DateFormat df = new SimpleDateFormat("MM/dd HH:mm");
         
-        result.append("Time,Tweets\n");
+        if (time)
+            result.append("Time,");
+        result.append("Tweets\n");
         
         for (int i=0;i<tweets.length;i++) {
-            result.append(df.format(current)).append(",");
+            if (time)
+                result.append(df.format(current)).append(",");
             current.setTime(current.getTime()+milliStep);
             result.append(tweets[i]).append("\n");
         }
-        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("tweets_over_time.csv")));
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
         out.print(result.toString());
         out.close();
+    }
+    
+    public static void exportTweetsOverTimeCsv(Data[] data, int hoursStep) throws IOException {
+        exportTweetsOverTimeCsv(data,hoursStep,"tweets_over_time.csv",true);
     }
     
     public static String exportTweetsOverTimeAscii(Data[] data, int hoursStep, int scale) {
@@ -65,7 +72,7 @@ public class Exporter {
         data = Sorter.sortByTime(data);
         
         Date current = (Date) data[0].time.clone();
-                
+        
         int milliStep = hoursStep*3600000;
         
         int pos = -1;
