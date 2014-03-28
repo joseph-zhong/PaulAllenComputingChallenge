@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
+    <title>Phailin Tweets</title>
     <meta charset="utf-8">
     <style type="text/css">
       html {
@@ -64,23 +65,16 @@
         font: 20px Georgia;
         padding: 10px;
       }
-
-      .year {
-        font: 16px Georgia;
-        line-height: 26px;
-        height: 30px;
-        text-align: center;
-        float: left;
-        width: 90px;
-        color: rgba(255, 255, 255, 0.4);
-
-        cursor: pointer;
-        -webkit-transition: all 0.1s ease-out;
-      }
-
-      .year:hover, .year.active {
-        font-size: 23px;
-        color: #fff;
+      
+      #subtitle {
+        position:absolute;
+        top:65px;
+        width:270px;
+        left:20px;
+        background-color: rgba(0,0,0,0.2);
+        font:15px Georgia;
+        color: rgba(255, 255, 255, 0.7);
+        padding:10px;
       }
 
       #ce span {
@@ -92,9 +86,28 @@
         height: 55px;
         display: block;
         position: absolute;
-        bottom: 15px;
-        left: 20px;
-        background: url(/PaulAllenComputingChallenge/ce.png);
+        bottom: 35px;
+        left: 25px;
+      }
+      
+      #link {
+        width:100px;
+        height:10px;
+        display:block;
+        position:absolute;
+        font:10px Georgia;
+        top:10px;
+        right:15px;
+      }
+      
+      #names {
+        width: 120px;
+        height:60px;
+        display:block;
+        position:absolute;
+        bottom:55px;
+        right:15px;
+        font:15px Georgia;
       }
 
 
@@ -107,6 +120,30 @@
   <div id="currentInfo">
     <span id="data" class="globe"></span>
   </div>
+  
+  <span id="link">
+    Made using 
+      <a href="http://www.chromeexperiments.com/globe">
+        WebGL
+      </a>
+  </span>
+  
+  <div id="title">Cyclone Phailin Tweets</div>
+  <div id="subtitle">
+    Each bar represents a single tweet with geolocation 
+    data for the sample of tweets during cyclone Phailin.
+  </div>
+  
+  <span id="ce" class="center">
+    Click and drag to rotate globe.
+    Scroll to zoom in and out.
+  </span>
+  
+  <span id="names">
+    <p>Tarik Onalan</p>
+    <p>Shreyas Raman</p>
+    <p>Alex Boulton</p>
+  </span>
 
   <script type="text/javascript" src="/PaulAllenComputingChallenge/third-party/Detector.js"></script>
   <script type="text/javascript" src="/PaulAllenComputingChallenge/third-party/three.min.js"></script>
