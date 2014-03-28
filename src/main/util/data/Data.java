@@ -19,15 +19,15 @@ public class Data {
     public String accountLocation;
     public String tweetSource;
     public ArrayList<String> hashtags;
-    public Point point;
-    public String location;
+    public Point locationCoords;
+    public String locationString;
     public String url1;
     public String expandedUrl1;
     public boolean isRetweet;
     public long originalTweetId;
     public int retweets; // Not sure on this one...
     
-    public Data(String line, int lineNum) throws ParseException {
+    public Data(String line) throws ParseException {
         String[] split = line.split("`");
         
         // ID
@@ -66,12 +66,11 @@ public class Data {
         hashtags.remove(0);
         
         //GPS-Lat and GPS-Long coordinates
-        try {
-            point = new Point(Double.parseDouble(split[8]), Double.parseDouble(split[9]));
-        } catch(NumberFormatException e) {}
+        if (!split[8].isEmpty())
+            locationCoords = new Point(Double.parseDouble(split[8]), Double.parseDouble(split[9]));
         
         // Location
-        location = !split[10].isEmpty() ? split[10] : location;
+        locationString = !split[10].isEmpty() ? split[10] : locationString;
         
         // URL
         url1 = !split[11].isEmpty() ? split[11] : url1;
@@ -92,7 +91,9 @@ public class Data {
     }
     
     public boolean isWithinDistance(Vector2D referenceVector, double distance) {
-        Vector2D locationVector = new Vector2D(point.longitude, point.latitude);
+        if (locationCoords == null)
+            return false;
+        Vector2D locationVector = new Vector2D(locationCoords.longitude, locationCoords.latitude);
         double radius = 3956.6;
         return Vector2D.angle(locationVector, referenceVector) * radius <= distance;
     }

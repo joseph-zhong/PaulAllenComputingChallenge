@@ -35,7 +35,7 @@ public class Exporter {
             current.setTime(current.getTime()+milliStep);
             result.append(tweets[i]).append("\n");
         }
-        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("exports\\" + file)));
         out.print(result.toString());
         out.close();
     }
@@ -106,8 +106,8 @@ public class Exporter {
         int i = 0;
         jsonString += "\'Series\', [";
         while(i < data.length) {
-            jsonString += data[i].point.latitude + ", ";
-            jsonString += data[i].point.longitude + ", ";
+            jsonString += data[i].locationCoords.latitude + ", ";
+            jsonString += data[i].locationCoords.longitude + ", ";
             jsonString += 10;
             if((i+1) < data.length)
                 jsonString += ", "; 

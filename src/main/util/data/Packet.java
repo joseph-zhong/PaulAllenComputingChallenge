@@ -10,11 +10,11 @@ public class Packet {
     }
     
     public static Packet getPacketFromData(Data data) {
-        return new Packet(data.point.latitude, data.point.longitude, 10);
+        return new Packet(data.locationCoords.latitude, data.locationCoords.longitude, 10);
     }
     
     public static Packet getPacketFromData(Data data, double magnitude) {
-        return new Packet(data.point.latitude, data.point.longitude, magnitude);
+        return new Packet(data.locationCoords.latitude, data.locationCoords.longitude, magnitude);
     }
     
     public static Packet[] getPacketFromData(Data[] data) {

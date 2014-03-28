@@ -16,15 +16,18 @@ public class Main {
         String[] hashtags = new String[] 
             {"cyclonephailin","odisha","india","cyclone","news",
             "andhrapradesh","phailinfury","bhubaneswar","gopalpur","nari"};
-        //Lat-Long for Gopalpur and Mumbai, respectively
-        Vector2D[] locs = new Vector2D[] { new Vector2D(84.92, 19.27), new Vector2D(72.8258, 18.975), new Vector2D(77.23, 28.61) };
+        
+        Vector2D gopalpurLoc = new Vector2D(84.92, 19.27);
+        Vector2D mumbaiLoc = new Vector2D(72.8258, 18.975);
+        Vector2D newDelhiLoc = new Vector2D(77.23, 28.61);
+        
         Data[] data = Parser.parse("phailin_tweets.csv");
         
-        Exporter.exportTweetsOverTimeCsv(Filter.filterNearLocation(Filter.filterGeoLoc(data),locs[0]),
+        Exporter.exportTweetsOverTimeCsv(Filter.filterNearLocation(Filter.filterGeoLoc(data),gopalpurLoc),
                 1,"gopalpur.csv",true);
-        Exporter.exportTweetsOverTimeCsv(Filter.filterNearLocation(Filter.filterGeoLoc(data),locs[1]),
+        Exporter.exportTweetsOverTimeCsv(Filter.filterNearLocation(Filter.filterGeoLoc(data),mumbaiLoc),
                 1,"mumbai.csv",true);
-        Exporter.exportTweetsOverTimeCsv(Filter.filterNearLocation(Filter.filterGeoLoc(data),locs[2]),
+        Exporter.exportTweetsOverTimeCsv(Filter.filterNearLocation(Filter.filterGeoLoc(data),newDelhiLoc),
                 1,"new-delhi.csv",true);
     }
 }

@@ -1,12 +1,13 @@
 package main.util;
 
-import main.util.data.Data;
 import java.util.Arrays;
 import java.util.Comparator;
+import main.util.data.Data;
 
 /** Contains static methods to sort Data[] */
 public class Sorter {
     
+    /* Sorts data by time. */
     public static Data[] sortByTime(Data[] data) {
         Arrays.sort(data,new TimeComparator());
         return data;

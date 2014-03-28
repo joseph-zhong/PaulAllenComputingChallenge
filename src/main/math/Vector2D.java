@@ -1,17 +1,28 @@
 package main.math;
 
 public class Vector2D {
+    
     private double x;
     private double y;
-    private double magnitude;
+    private double magnitude = -1;
+    
     public double getX() { return x; }
     public double getY() { return y; }
-    public double getMagnitude() { return magnitude; }
     
-    private void magnitude() { magnitude = Math.sqrt(x*x + y*y); }
+    public double getMagnitude() {
+        if (magnitude < 0)
+            calculateMagnitude();
+        return magnitude;
+    }
     
-    public Vector2D(double x) { this.x=x; magnitude(); }
-    public Vector2D(double x, double y) { this.x=x; this.y=y; magnitude(); }
+    private void calculateMagnitude() {
+        magnitude = Math.sqrt(x*x + y*y);
+    }
+    
+    public Vector2D(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
     
     public static double dotProduct(Vector2D v1, Vector2D v2) {
         return v1.getX()*v2.getX() + v1.getY()*v2.getY();

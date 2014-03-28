@@ -2,55 +2,59 @@ package main.util;
 
 import java.util.ArrayList;
 import main.math.Vector2D;
-import main.util.arrays.DataArray;
 import main.util.data.Data;
 
 public class Filter {
-    public static Data[] filterGeo(Data[] set) {
-        ArrayList<Data> filteredSet = new ArrayList<>();
-        for(Data item : set)
-            if(item.location != null)
-                filteredSet.add(item);
+    
+    /** @return Elements with geolocation data (coordinates). */
+    public static Data[] filterGeoLoc(Data[] data) {
+        ArrayList<Data> filteredData = new ArrayList<Data>();
+        filteredData.add(data[0]);
         
-        return filteredSet.toArray(new Data[filteredSet.size()]);
+        for(Data item : data)
+            if(item.locationCoords != null)
+                filteredData.add(item);
+        
+        filteredData.add(data[data.length-1]);
+        return filteredData.toArray(new Data[0]);
     }
     
-    public static Data[] filterGeoLoc(Data[] set) {
-        ArrayList<Data> filteredSet = new ArrayList<>();
-        for(Data item : set)
-            if(item.point != null)
-                filteredSet.add(item);
+    /** @return Elements with specified hashtag. */
+    public static Data[] filterHashtag(Data[] data, String hashtag) {
+        ArrayList<Data> filteredData = new ArrayList<Data>(data.length+1);
+        filteredData.add(data[0]);
         
-        return filteredSet.toArray(new Data[filteredSet.size()]);
-    }
-    
-    public static Data[] filterHashtag(Data[] set, String hashtag) {
-        DataArray array = new DataArray(set.length+1);
-        array.add(set[0]);
-        for(Data item : set)
+        for(Data item : data)
             if(item.hashtags.contains(hashtag))
-                array.add(item);
-        array.add(set[set.length-1]);
-        return array.getValues();
+                filteredData.add(item);
+        
+        filteredData.add(data[data.length-1]);
+        return filteredData.toArray(new Data[0]);
     }
     
-    public static Data[] filterRetweet(Data[] set) {
-        ArrayList<Data> filteredSet = new ArrayList<Data>();
-        filteredSet.add(set[0]);
-        for(Data item : set)
+    /** @return Elements that aren't retweets. */
+    public static Data[] filterRetweet(Data[] data) {
+        ArrayList<Data> filteredData = new ArrayList<Data>();
+        filteredData.add(data[0]);
+        
+        for(Data item : data)
             if(!item.isRetweet)
-                filteredSet.add(item);
-        filteredSet.add(set[set.length-1]);
-        return filteredSet.toArray(new Data[filteredSet.size()]);
+                filteredData.add(item);
+        
+        filteredData.add(data[data.length-1]);
+        return filteredData.toArray(new Data[0]);
     }
     
-    public static Data[] filterNearLocation(Data[] originalSet, Vector2D point) {
-        DataArray array = new DataArray(originalSet.length+1);
-        array.add(originalSet[0]);
-        for(Data item : originalSet)
-            if(item.isWithinDistance(point, (double)100))
-                array.add(item);
-        array.add(originalSet[originalSet.length-1]);
-        return array.getValues();
+    /** @return Elements within a hundred miles of the point. */
+    public static Data[] filterNearLocation(Data[] data, Vector2D point) {
+        ArrayList<Data> filteredData = new ArrayList<Data>(data.length+1);
+        filteredData.add(data[0]);
+        
+        for(Data item : data)
+            if(item.isWithinDistance(point,100.0))
+                filteredData.add(item);
+        
+        filteredData.add(data[data.length-1]);
+        return filteredData.toArray(new Data[0]);
     }
 }

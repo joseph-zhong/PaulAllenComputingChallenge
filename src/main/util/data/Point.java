@@ -1,6 +1,7 @@
 package main.util.data;
 
 public class Point {
+    
     public double latitude;
     public double longitude;
     
