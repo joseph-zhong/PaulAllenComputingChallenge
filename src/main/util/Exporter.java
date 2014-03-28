@@ -8,10 +8,8 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import main.math.Vector2D;
 import main.util.data.Data;
 import main.util.data.Packet;
-import main.util.data.Point;
 
 /** Contains static methods to export Data[] */
 public class Exporter {
@@ -90,14 +88,6 @@ public class Exporter {
         }
         
         return results;
-    }
-    
-    public static int exportTweetsNearLocation(Data[] data, Point point) {
-        int count = 0;
-        for(Data item : data)
-            if(item.isWithinDistance(new Vector2D(point.longitude, point.latitude), (double)100))
-                count++;
-        return count;
     }
     
     public static Packet[] exportToPackets(Data[] data) {
